@@ -4,6 +4,7 @@ import com.bank.dao.AccountRepository;
 import com.bank.dao.entity.AccountEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Profile("!test")
 @RequiredArgsConstructor
 public class BalanceScheduler {
 
@@ -25,7 +27,7 @@ public class BalanceScheduler {
     @Scheduled(fixedRate = 30_000)
     @Transactional
     public void accrue() {
-        List<AccountEntity> accounts = accountRepository.findAll();
+        List<AccountEntity> accounts = accountRepository.findAllForUpdate();
         int updated = 0;
         for (AccountEntity account : accounts) {
             BigDecimal max = account.getInitialBalance().multiply(CAP).setScale(2, RoundingMode.HALF_UP);

@@ -4,9 +4,6 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-  task:
-    scheduling:
-      enabled: false
 
 app:
   jwt:

@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:13.7-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bank
+      POSTGRES_USER: bank
+      POSTGRES_PASSWORD: bank
+    volumes:
+      - bank_pg_data:/var/lib/postgresql/data
+
+volumes:
+  bank_pg_data:

@@ -1,0 +1,14 @@
+spring:
+  cache:
+    type: simple
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  task:
+    scheduling:
+      enabled: false
+
+app:
+  jwt:
+    secret: test-secret-key-at-least-32-bytes-long!!
+    expiration-ms: 3600000

@@ -25,3 +25,15 @@ docker compose up -d
 | 3 | anna@example.com | 79203333333 |
 
 Логин: `POST /auth/login` с `email` **или** `phone` + `password`. Дальше заголовок `Authorization: Bearer <token>`.
+
+## Тесты
+
+Нужен Docker (Testcontainers поднимает `postgres:13.7-alpine`).
+Для Docker 29+ в тестах зафиксирован Docker API `1.44` (иначе клиент 1.32 отклоняется).
+
+```bash
+mvn test
+```
+
+- `TransferServiceTest` — unit на перевод денег  
+- `TransferApiTest` — MockMvc + Testcontainers (login + transfer)

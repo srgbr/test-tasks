@@ -12,3 +12,8 @@ spring:
     open-in-view: false
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
+
+app:
+  jwt:
+    secret: change-me-to-a-long-secret-key-for-hs256-algo
+    expiration-ms: 86400000

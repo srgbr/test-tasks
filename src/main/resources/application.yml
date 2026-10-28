@@ -24,3 +24,7 @@ app:
   jwt:
     secret: change-me-to-a-long-secret-key-for-hs256-algo
     expiration-ms: 86400000
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

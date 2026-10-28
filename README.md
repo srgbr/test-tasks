@@ -2,6 +2,8 @@
 
 REST API на Java 11 / Spring Boot 2.7.
 
+Репозиторий: https://github.com/srgbr/test-task
+
 ## Запуск из IDE
 
 1. Поднять Postgres и Redis:

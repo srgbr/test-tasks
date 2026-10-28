@@ -10,6 +10,7 @@ import com.bank.dto.EmailRequest;
 import com.bank.dto.PhoneRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class UserContactService {
     private final PhoneDataRepository phoneDataRepository;
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public ContactResponse addEmail(Long userId, EmailRequest request) {
         ensureEmailFree(request.getEmail());
         EmailDataEntity entity = new EmailDataEntity();
@@ -34,6 +36,7 @@ public class UserContactService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public ContactResponse updateEmail(Long userId, Long emailId, EmailRequest request) {
         EmailDataEntity entity = requireOwnEmail(userId, emailId);
         if (!entity.getEmail().equals(request.getEmail())) {
@@ -45,6 +48,7 @@ public class UserContactService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public void deleteEmail(Long userId, Long emailId) {
         requireOwnEmail(userId, emailId);
         if (emailDataRepository.countByUserId(userId) <= 1) {
@@ -55,6 +59,7 @@ public class UserContactService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public ContactResponse addPhone(Long userId, PhoneRequest request) {
         ensurePhoneFree(request.getPhone());
         PhoneDataEntity entity = new PhoneDataEntity();
@@ -66,6 +71,7 @@ public class UserContactService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public ContactResponse updatePhone(Long userId, Long phoneId, PhoneRequest request) {
         PhoneDataEntity entity = requireOwnPhone(userId, phoneId);
         if (!entity.getPhone().equals(request.getPhone())) {
@@ -77,6 +83,7 @@ public class UserContactService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "users", allEntries = true)
     public void deletePhone(Long userId, Long phoneId) {
         requireOwnPhone(userId, phoneId);
         if (phoneDataRepository.countByUserId(userId) <= 1) {

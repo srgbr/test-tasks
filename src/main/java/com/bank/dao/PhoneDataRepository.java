@@ -12,6 +12,8 @@ public interface PhoneDataRepository extends JpaRepository<PhoneDataEntity, Long
 
     List<PhoneDataEntity> findByUserId(Long userId);
 
+    List<PhoneDataEntity> findByUserIdIn(List<Long> userIds);
+
     long countByUserId(Long userId);
 
     boolean existsByPhone(String phone);
